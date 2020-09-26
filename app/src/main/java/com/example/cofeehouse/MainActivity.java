@@ -11,25 +11,25 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    int noOfCofee = 0;
+    int totalPrice = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
-    int noOfCofee = 0;
-    int totalPrice = 0;
-    boolean hasWhippedCream = false;
-    boolean hasChocolate = false;
-
     public void increment(View view) {
         noOfCofee = noOfCofee + 1;
+        totalPrice = totalPrice + 4;
         displayQuantity();
     }
 
     public void decrement(View view) {
         if (noOfCofee != 0) {
             noOfCofee = noOfCofee - 1;
+            totalPrice = totalPrice - 4;
         }
         displayQuantity();
     }
@@ -42,16 +42,9 @@ public class MainActivity extends AppCompatActivity {
     public void expandCheckBoxes(View view) {
         CheckBox whippedCream = findViewById(R.id.whippedCream);
         CheckBox chocolate = findViewById(R.id.chocolate);
+
         whippedCream.setVisibility(View.VISIBLE);
         chocolate.setVisibility(View.VISIBLE);
-    }
-
-    public void addedExtraWhippedCream(View view) {
-        hasWhippedCream = true;
-    }
-
-    public void addedExtraChocolate(View view) {
-        hasChocolate = true;
     }
 
 
@@ -59,10 +52,19 @@ public class MainActivity extends AppCompatActivity {
         TextView orderSummary = findViewById(R.id.orderSummary);
         TextView orderSummaryHeading = findViewById(R.id.orderSummaryHeading);
         EditText editName = findViewById(R.id.editName);
-        orderSummary.setVisibility(View.VISIBLE);
-        orderSummaryHeading.setVisibility(View.VISIBLE);
-        totalPrice = noOfCofee * 4;
-        orderSummary.setText("Thank you" + editName.getText().toString() + "\nTotal : $" + totalPrice);
-        Toast.makeText(this, "Ordered!!", Toast.LENGTH_SHORT).show();
+
+        if (editName.getText().toString().length() != 0) {
+            orderSummary.setVisibility(View.VISIBLE);
+            orderSummaryHeading.setVisibility(View.VISIBLE);
+
+            orderSummary.setText("Thank you " + editName.getText().toString() + "\n" + "Total price   : $" + totalPrice);
+            Toast.makeText(this, "Ordered!!", Toast.LENGTH_SHORT).show();
+        } else {
+
+            Toast.makeText(this, "Enter Your name please", Toast.LENGTH_SHORT).show();
+        }
     }
 }
+//Todo:display price of checkboxes when checked
+//Todo:click button only when editext filed has a name
+//Todo:add an intent

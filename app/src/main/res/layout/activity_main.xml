@@ -81,7 +81,6 @@
             android:id="@+id/whippedCream"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="addedExtraWhippedCream"
             android:text="Whipped Cream : $1"
             android:visibility="gone" />
 
@@ -89,7 +88,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/chocolate"
-            android:onClick="addedExtraChocolate"
             android:text="Chocolate            : $2"
             android:visibility="gone" />
 
