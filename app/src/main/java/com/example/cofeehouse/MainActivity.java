@@ -2,6 +2,8 @@ package com.example.cofeehouse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -49,18 +51,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void orderButtonClick(View view) {
-        TextView orderSummary = findViewById(R.id.orderSummary);
-        TextView orderSummaryHeading = findViewById(R.id.orderSummaryHeading);
+
         EditText editName = findViewById(R.id.editName);
-
+        String text = "Thank you " + editName.getText().toString() + "\nTotal price   : $ " + totalPrice;
         if (editName.getText().toString().length() != 0) {
-            orderSummary.setVisibility(View.VISIBLE);
-            orderSummaryHeading.setVisibility(View.VISIBLE);
 
-            orderSummary.setText("Thank you " + editName.getText().toString() + "\n" + "Total price   : $" + totalPrice);
+
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ankushrai96@gmail.com"});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Cofee Order");
+            intent.putExtra(Intent.EXTRA_TEXT, text);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+
+
             Toast.makeText(this, "Ordered!!", Toast.LENGTH_SHORT).show();
         } else {
-
             Toast.makeText(this, "Enter Your name please", Toast.LENGTH_SHORT).show();
         }
     }
