@@ -51,9 +51,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void orderButtonClick(View view) {
+        CheckBox whippedCream = findViewById(R.id.whippedCream);
+        boolean hasWhippedCream = whippedCream.isChecked();
+        CheckBox chocolate = findViewById(R.id.chocolate);
+        boolean hasChocolate = chocolate.isChecked();
 
         EditText editName = findViewById(R.id.editName);
-        String text = "Thank you " + editName.getText().toString() + "\nTotal price   : $ " + totalPrice;
+        String text = "Thank you " + editName.getText().toString();
+        if (hasWhippedCream == true) {
+            totalPrice = totalPrice + 1;
+            text = text + "\nWhipped Cream : $ 1";
+        }
+        if (hasChocolate == true) {
+            totalPrice = totalPrice + 2;
+            text = text + "\nChocolate : $ 2";
+        }
+        text = text + "\nTotal price   : $ " + totalPrice;
         if (editName.getText().toString().length() != 0) {
 
 
